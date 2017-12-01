@@ -2,7 +2,7 @@
 * @Author: lai_lc
 * @Date:   2017-12-01 11:20:50
 * @Last Modified by:   lai_lc
-* @Last Modified time: 2017-12-01 15:37:58
+* @Last Modified time: 2017-12-01 17:13:03
 */
 'use strict';
 
@@ -29,35 +29,35 @@ app.use(session({
 	})
 }))
 
-
-app.use(Statistic.apiRecord);
-
 app.all('*', (req, res, next) => {
 	res.header("Access-Control-Allow-Origin", req.headers.origin || '*');
 	res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With");
 	res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
   	res.header("Access-Control-Allow-Credentials", true); //可以带cookies
 	res.header("X-Powered-By", '3.2.1')
-	console.log(req.headers);
-	console.log(req.headers.origin);
 	if (req.method == 'OPTIONS') {
 	  	res.send(200);
 	} else {
-		if (req.session.count) {
-			req.session.count++;
-		} else {
-			req.session.count = 1;
-		}
-	    next("ok");
+	    next();
 	}
+});
+
+app.use(Statistic.apiRecord);
+
+app.use(express.static('./public'));
+
+app.use(function(req, res, next) {
+	res.send("ok");
 });
 
 
 app.use(function(err, req, res, next) {
-	console.log('this next?');
-	res.send("ok");
+	if (err) {
+		res.send("500");
+	} else {
+		res.send("ok");	
+	}
 });
-
 
 
 var httpServer = http.createServer(app);
