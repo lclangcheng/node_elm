@@ -2,7 +2,7 @@
 * @Author: lai_lc
 * @Date:   2017-12-01 15:02:50
 * @Last Modified by:   lai_lc
-* @Last Modified time: 2017-12-01 15:51:03
+* @Last Modified time: 2017-12-05 10:33:43
 */
 
 
@@ -27,6 +27,8 @@ const idsSchema = new mongoose.Schema({
 
 const Ids = mongoose.model('Ids', idsSchema);
 
+
+//用于初始化数据
 Ids.findOne((err, data) => {
 	if (!data) {
 		const newIds = new Ids({

@@ -2,7 +2,7 @@
 * @Author: lai_lc
 * @Date:   2017-12-01 11:20:50
 * @Last Modified by:   lai_lc
-* @Last Modified time: 2017-12-01 17:13:03
+* @Last Modified time: 2017-12-04 17:36:49
 */
 'use strict';
 
@@ -12,22 +12,10 @@ import connectMongo from 'connect-mongo';
 import http from 'http';
 import express from 'express';
 import Statistic from './middlewares/statistic';
-import db from './mongodb/db.js';
+import db from './mongodb/db';
+import router from './routes/index'
 
 var app = express();
-
-
-const MongoStore = connectMongo(session);
-app.use(session({
-	name: config.session.name,
-	secret: config.session.secret,
-	resave: true,
-	saveUninitialized: false,
-	cookie: config.session.cookie,
-	store: new MongoStore({
-	  	url: config.url
-	})
-}))
 
 app.all('*', (req, res, next) => {
 	res.header("Access-Control-Allow-Origin", req.headers.origin || '*');
@@ -44,23 +32,24 @@ app.all('*', (req, res, next) => {
 
 app.use(Statistic.apiRecord);
 
+const MongoStore = connectMongo(session);
+app.use(session({
+	name: config.session.name,
+	secret: config.session.secret,
+	resave: true,
+	saveUninitialized: false,
+	cookie: config.session.cookie,
+	store: new MongoStore({
+	  	url: config.url
+	})
+}))
+
+router(app);
+
 app.use(express.static('./public'));
-
-app.use(function(req, res, next) {
-	res.send("ok");
-});
-
-
-app.use(function(err, req, res, next) {
-	if (err) {
-		res.send("500");
-	} else {
-		res.send("ok");	
-	}
-});
-
 
 var httpServer = http.createServer(app);
 httpServer.listen(config.port);
 
 console.log('httpserver listening',  config.port);
+
