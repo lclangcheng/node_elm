@@ -13,7 +13,6 @@
 2.项目使用固定id做全局索引，也便于统计
 3.babel转义es5
 
-
 # 修改controller
 
 ```
@@ -21,14 +20,13 @@
 	-admin.js
 		-login流程
 
-## 项目运行
+# 项目运行
 
 ```
 项目运行之前，请确保系统已经安装以下应用
 1、node (6.0 及以上版本)
 2、mongodb (开启状态)
 3、GraphicsMagick (裁切图片) (win7使用6.0版本 ImageMagick不然裁切图片时报错)
-
 
 # 项目布局
 
