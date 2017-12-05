@@ -3,22 +3,24 @@
 
 ```
 项目源于https://github.com/bailicangdu/node-elm，是个不错的学习项目
-1.项目使用node + mongodb部署
-2.项目MVC模式清晰，可读性高
+1、项目使用node + mongodb部署
+2、项目MVC模式清晰，可读性高
 
 # 学习亮点
 
 ```
-1.使用es6语法，使用起来简单明了，Async/Await更易读
-2.项目使用固定id做全局索引，也便于统计
-3.babel转义es5
+1、使用es6语法，使用起来简单明了，Async/Await更易读
+2、项目使用固定id做全局索引，也便于统计
+3、babel转义es5
 
 # 修改controller
 
 ```
+.
 -admin
 	-admin.js
 		-login流程
+.
 
 # 项目运行
 
